@@ -2,16 +2,16 @@
  * Created by LaravelChen on 2018/1/21.
  */
 import types from  '../types/Types';
-function cardReducer(state = {isLogin: false}, action) {
+function webSocketReducer(state = {webMessage: ""}, action) {
     switch (action.type) {
-        case types.IS_LOGIN:
+        case types.WEB_MESSAGE:
             return {
                 ...state,
-                isLogin: action.isLogin
+                webMessage: action.webMessage
             }
         default:
             return state
     }
 }
 
-export default cardReducer;
+export default webSocketReducer;

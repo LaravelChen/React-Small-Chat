@@ -37,6 +37,7 @@ class PubChat extends Component {
             let data = JSON.parse(evt.data);
             if (data.action === Config.statics.PUBLIC_CHAT) {
                 let arr = this.state.dataSource;
+                console.log(data);
                 arr.push(data);
                 this.setState({dataSource: arr}, () => {
                     $("#chat_list_content").scrollTop($("#chat_list_content")[0].scrollHeight);
@@ -49,7 +50,7 @@ class PubChat extends Component {
         }.bind(this);
         //关闭连接
         webSocket.onclose = function () {
-            console.log("asda");
+            console.log("close");
         }.bind(this);
     }
 

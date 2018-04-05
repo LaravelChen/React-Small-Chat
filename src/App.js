@@ -2,16 +2,20 @@ import React, {Component} from 'react';
 import NavBar from './compoents/Main/NavBar';
 import './resources/css/bulma.css';
 import './resources/css/App.css';
+import {bindActionCreators} from "redux";
+import * as IndexAction from "./actions/IndexActions";
+import {connect} from "react-redux";
+import store from "./stores";
 
-// import Footer from './compoents/Main/Footer';
 class App extends Component {
     constructor(props) {
         super(props);
-
     }
+
     componentDidMount() {
 
     }
+
     render() {
         return (
             <div>
@@ -22,4 +26,6 @@ class App extends Component {
     }
 }
 
-export default App;
+export default connect((state, props) => ({}), dispatch => ({
+    indexAction: bindActionCreators(IndexAction, dispatch),
+}))(App);

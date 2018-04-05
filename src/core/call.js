@@ -6,6 +6,7 @@ import Config from '../core/config';
 import Md5 from '../core/md5';
 import Storage from '../core/localStorage';
 import {message} from 'antd';
+import {browserHistory} from 'react-router';
 
 const Call = {
     callApi: function (api, data, token = "") {
@@ -28,10 +29,11 @@ const Call = {
             },
         }).then(function (response) {
             if (response.code !== Config.code.SUCCESS) {
-                if (response.code == Config.code.ERROR_TOKEN) {
-                    window.location.href = "/login";
+                if (response.code === Config.code.ERROR_TOKEN) {
+                    browserHistory.push("/login");
                     Storage.LocalStorage().clear();
                     message.error("登录状态失效,请重新登录!");
+                    return false;
                 } else {
                     message.error(response.message);
                     console.log(response);
@@ -56,7 +58,7 @@ const Call = {
             processData: false,
         }).then(function (response) {
             if (response.code !== Config.code.SUCCESS) {
-                if (response.code == Config.code.ERROR_TOKEN) {
+                if (response.code === Config.code.ERROR_TOKEN) {
                     window.location.href = "/login";
                     message.error("登录状态失效,请重新登录!");
                 } else {
@@ -76,7 +78,6 @@ const Call = {
         string += apiInfo;
         string += Config.statics.CLIENT_VERSION;
         string += Config.statics.SALT;
-        console.log(string);
 
         var hashHandler = Md5;
 

@@ -14,7 +14,8 @@ export default {
         //聊天
         PUBLIC_CHAT: "PUBLIC",
         PUBLIC_USER_LIST: "PUBLIC_USER_LIST",
-        PUBLIC_USER_CLOSE:"PUBLIC_USER_CLOSE",
+        PUBLIC_USER_CLOSE: "PUBLIC_USER_CLOSE",
+        ADD_USER_NOTIFICATION: "ADD_USER_NOTIFICATION",
     },
     code: {
         SUCCESS: 200,

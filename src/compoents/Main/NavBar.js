@@ -7,16 +7,55 @@ import Storage from '../../core/localStorage';
 import * as IndexAction from '../../actions/IndexActions';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import Config from "../../core/config";
+import {notification, Badge} from 'antd';
+
+const webSocket = new WebSocket(Config.statics.WEBSOCKET_ADDRESS);
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {isLogin: ""};
+        this.state = {isLogin: "", notification_count: 0};
     }
 
     componentDidMount() {
         //获取登录标识
         this.setState({isLogin: Storage.isLogin()});
+
+        //初始化
+        webSocket.onopen = function () {
+            let data = {
+                "action": Config.statics.PUBLIC_USER_LIST,
+                "content": {
+                    "name": Storage.LocalStorage().getItem("name"),
+                    "email": Storage.LocalStorage().getItem("email"),
+                    "avatar": Storage.LocalStorage().getItem("avatar"),
+                }
+            };
+            data = JSON.stringify(data);
+            webSocket.send(data);
+        };
+
+        //接受websocket消息
+        webSocket.onmessage = function (evt) {
+            let data = JSON.parse(evt.data);
+            if (data.action === Config.statics.ADD_USER_NOTIFICATION) {
+                notification.open({
+                    message: '添加好友通知',
+                    description: data.content.message,
+                });
+                console.log(data.content.count);
+                this.setState({notification_count: data.content.count});
+            }
+        }.bind(this);
+
+        //接收消息
+        let form = {"to_user_id": Storage.LocalStorage().getItem("id"), "type": "ADDUSER", "is_read": "NO"};
+        this.props.indexAction.getNotificationCount(form).payload.then((response) => {
+            if (response !== false) {
+                this.setState({notification_count: response.result})
+            }
+        });
     }
 
     logout() {
@@ -45,20 +84,30 @@ class NavBar extends Component {
                 </div>
             </div>);
         } else {
-            login = (<div className="navbar-item has-dropdown is-hoverable" style={{marginLeft: 20, marginRight: 30}}>
-                <a className="navbar-link  is-active">
-                    <div>
-                        <img className="head_img" src="https://photo.laravelchen.cn/avataravatar.jpeg"/>
+            login = (
+                <div>
+                    <div className="navbar-item bell">
+                        <Link>
+                            <Badge count={this.state.notification_count}>
+                                <i className="fa fa-bell font-20"></i>
+                            </Badge>
+                        </Link>
                     </div>
-                </a>
-                <div className="navbar-dropdown ">
-                    <a className="navbar-item" href="#">
-                        账户设置</a>
-                    <hr style={{margin: 5}}/>
-                    <a onClick={this.logout.bind(this)} className="navbar-item " href="#">
-                        退出登录</a>
-                </div>
-            </div>);
+                    <div className="navbar-item has-dropdown is-hoverable" style={{marginLeft: 20, marginRight: 30}}>
+                        <a className="navbar-link  is-active">
+                            <div>
+                                <img className="head_img" src="https://photo.laravelchen.cn/avataravatar.jpeg"/>
+                            </div>
+                        </a>
+                        <div className="navbar-dropdown ">
+                            <a className="navbar-item" href="#">
+                                账户设置</a>
+                            <hr style={{margin: 5}}/>
+                            <a onClick={this.logout.bind(this)} className="navbar-item " href="#">
+                                退出登录</a>
+                        </div>
+                    </div>
+                </div>);
         }
 
         return (

@@ -5,7 +5,9 @@ import React, {Component} from 'react';
 import {Tabs} from 'antd';
 import AccountPassLogin from './LoginType/AccountPassLogin';
 import PhoneLogin from './LoginType/PhoneLogin';
+
 const TabPane = Tabs.TabPane;
+
 class Login extends Component {
     callback(key) {
         console.log(key);

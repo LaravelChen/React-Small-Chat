@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 
 body {
+    padding: 0 !important;
     background: #f0f2f5;
     background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
 }
@@ -239,8 +240,9 @@ a:focus {
 .chat_send_head span:hover {
     cursor: pointer;
 }
-.padding_left_5{
-    padding-left: 5px!important;
+
+.padding_left_5 {
+    padding-left: 5px !important;
 }
 
 .resize-no {
@@ -252,7 +254,7 @@ a:focus {
     border: none;
 }
 
-*:focus {
+textarea:focus {
     outline: none;
     border: none;
 }
@@ -268,7 +270,7 @@ a:focus {
 
 .chat_list_content_list {
     height: 411px;
-    padding: 20px 20px 10px 20px;
+    padding: 20px 20px 5px 20px;
     overflow: auto;
     background-color: #FCFCFC;
 }
@@ -282,10 +284,11 @@ a:focus {
     color: #6B6B6B;
 }
 
-.media + .media {
+.media {
     border: none !important;
-    margin-top: 10px !important;
-    padding-top: 5px !important;
+    margin-top: 2px !important;
+    padding-bottom: 10px !important;
+    padding-top: 0 !important;
 }
 
 .ant-popover-inner-content {
@@ -304,6 +307,7 @@ a:focus {
     position: relative;
     max-width: 350px;
     display: inline-block;
+    z-index: 50;
 }
 
 .absoulte {
@@ -321,6 +325,68 @@ a:focus {
     padding: 5px 10px;
     font-size: 15px;
     font-weight: 400;
+}
+
+/*头像点击出现弹框*/
+.media-left {
+    position: relative;
+}
+
+.user_add {
+    position: absolute;
+    z-index: 100;
+    top: -20px;
+    left: 50px;
+    width: 300px;
+    text-align: center;
+}
+
+.padding-left-30 {
+    padding-left: 30px;
+}
+
+.padding-top-12 {
+    padding-top: 12px;
+}
+
+.user_add_font {
+    text-align: left;
+    padding-left: 30px;
+    font-size: 20px;
+    margin-top: -15px;
+}
+
+.user_add_font:hover {
+    cursor: pointer;
+}
+
+.ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding-right: 0px;
+}
+
+.color_orange {
+    color: #FF7F00;
+}
+.font-20{
+    font-size: 20px;
+}
+.bell{
+    float: left;
+    height: 100%;
+}
+
+.media-right{
+    position: relative;
+    float: right;
+}
+.text-right{
+    text-align: right;
+}
+.media_myself{
+    margin-top: 15px !important;
+    margin-bottom: 10px !important;
 }
 
 

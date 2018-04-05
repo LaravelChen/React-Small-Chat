@@ -3,6 +3,6 @@
  */
 const actionTypes = {
     REQUEST_WAY: 'AJAX',
-    IS_LOGIN: 'IS_LOGIN'
+    WEB_MESSAGE: 'WEB_MESSAGE'
 };
 export default actionTypes
