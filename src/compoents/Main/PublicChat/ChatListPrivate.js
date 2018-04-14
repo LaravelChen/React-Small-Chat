@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import OtherByName from './ChatSingle/OtherByName';
 import Myself from './ChatSingle/Myself';
 import Storage from "../../../core/localStorage";
+import OtherNoName from "./ChatSingle/OtherNoName";
 
-class ChatList extends Component {
+class ChatListPrivate extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,7 +16,7 @@ class ChatList extends Component {
                             if (Storage.LocalStorage().getItem("id") === chat.content.user_id+"") {
                                 return <Myself key={chat.content.fd}  chat={chat}></Myself>
                             }else {
-                                return <OtherByName key={chat.content.fd} chat={chat}></OtherByName>
+                                return <OtherNoName key={chat.content.fd} chat={chat}></OtherNoName>
                             }
                         }
                     )
@@ -27,4 +27,4 @@ class ChatList extends Component {
     }
 }
 
-export default ChatList;
+export default ChatListPrivate;

@@ -48,6 +48,10 @@ const Call = {
         })
     },
     uploadImage: function (api, data, token = "") {
+        //获取token
+        let new_token = Storage.LocalStorage().getItem("token");
+        token = new_token === null ? "" : new_token;
+
         let apiInfo = Config.statics.APIADDRESS + api;
         let callData = this.getCallData(api, data, token);
         return $.ajax({

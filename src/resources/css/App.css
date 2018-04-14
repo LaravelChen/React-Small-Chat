@@ -99,6 +99,16 @@ a:focus {
 .padding-20 {
     padding: 20px;
 }
+.padding-20-important{
+    padding: 20px !important;
+    position: relative;
+}
+
+.ant-pagination{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
 
 .navbar-item, .navbar-link {
     padding: 0.5rem 1.5rem;
@@ -109,6 +119,9 @@ a:focus {
 .image-150 {
     width: 150px;
     height: 150px;
+}
+.text-center{
+    text-align: center;
 }
 
 .ant-tabs-bar {
@@ -298,6 +311,9 @@ textarea:focus {
 .ant-popover-placement-right, .ant-popover-placement-rightTop, .ant-popover-placement-rightBottom {
     margin-left: -5px !important;
 }
+.userInfo_hr{
+    border: 1px solid #EDEDED;
+}
 
 .ant-popover-placement-right > .ant-popover-content > .ant-popover-arrow {
     top: 18px;
@@ -387,6 +403,33 @@ textarea:focus {
 .media_myself{
     margin-top: 15px !important;
     margin-bottom: 10px !important;
+}
+.userInfo_content{
+    padding: 50px 100px;
+}
+.username_line{
+    overflow: hidden;
+}
+.username_line p{
+    float: left;
+    text-align: right;
+    width: 50%;
+    line-height: 3;
+    margin-right: 20px;
+}
+.username_line div{
+    float: left;
+}
+.image-80{
+    width: 80px;
+    height: 80px;
+    margin-left: 20px;
+}
+.userInfo_btn{
+    text-align: center;
+}
+.my_button{
+    padding: 10px 40px;
 }
 
 

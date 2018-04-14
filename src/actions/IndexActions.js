@@ -48,6 +48,15 @@ export const Logout = function (data) {
     }
 }
 
+//上传图片
+export const Avatar = function (data) {
+    var api = '/UserCenter/UserCenterController/ShowPostFile';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.uploadImage(api, data)
+    }
+}
+
 //群聊的记录
 export const ChatList = function (data) {
     var api = '/UserCenter/UserChatController/ChatList';
@@ -68,6 +77,60 @@ export const sendAddUserNotification = function (data) {
 //获取通知数
 export const getNotificationCount = function (data) {
     var api = '/UserCenter/NotificationController/getNotificationCount';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//获取好友列表
+export const FriendList = function (data) {
+    var api = '/UserCenter/FriendController/getFriendList';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//获取好友详细信息
+export const FriendInfo = function (data) {
+    var api = '/UserCenter/FriendController/getFriendInfo';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//获取私聊的列表记录
+export const PrivateChatList = function (data) {
+    var api = '/UserCenter/FriendController/getPrivateChatList';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//获取私聊的列表记录
+export const getNotificationList = function (data) {
+    var api = '/UserCenter/NotificationController/getNotificationList';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//接受加好友请求
+export const receivce = function (data) {
+    var api = '/UserCenter/FriendController/receivce';
+    return {
+        type: types.REQUEST_WAY,
+        payload: Call.callApi(api, data)
+    }
+}
+
+//拒绝加好友请求
+export const refuse = function (data) {
+    var api = '/UserCenter/FriendController/refuse';
     return {
         type: types.REQUEST_WAY,
         payload: Call.callApi(api, data)

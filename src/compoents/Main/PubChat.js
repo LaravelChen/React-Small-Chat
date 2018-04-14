@@ -22,6 +22,8 @@ class PubChat extends Component {
     componentDidMount() {
         //调用群聊的聊天记录
         let form = {"paging": {"page": 1, "limit": 20}};
+
+        //获取聊天记录内容
         this.props.indexAction.ChatList(form).payload.then((response) => {
             this.setState({dataSource: response.result.data}, () => {
                 $("#chat_list_content").scrollTop($("#chat_list_content")[0].scrollHeight);
@@ -32,18 +34,19 @@ class PubChat extends Component {
         webSocket.onopen = function () {
             this.connectSuccess();
         }.bind(this);
+
         //接受信息
         webSocket.onmessage = function (evt) {
             let data = JSON.parse(evt.data);
             if (data.action === Config.statics.PUBLIC_CHAT) {
                 let arr = this.state.dataSource;
-                console.log(data);
                 arr.push(data);
                 this.setState({dataSource: arr}, () => {
                     $("#chat_list_content").scrollTop($("#chat_list_content")[0].scrollHeight);
                 });
             }
 
+            //获取在线用户列表
             if (data.action === Config.statics.PUBLIC_USER_LIST) {
                 this.setState({userList: data.content});
             }

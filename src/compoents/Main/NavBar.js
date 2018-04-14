@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Config from "../../core/config";
 import {notification, Badge} from 'antd';
+import title from '../../resources/demo.png';
 
 const webSocket = new WebSocket(Config.statics.WEBSOCKET_ADDRESS);
 
@@ -87,21 +88,22 @@ class NavBar extends Component {
             login = (
                 <div>
                     <div className="navbar-item bell">
-                        <Link>
+                        <Link to="/showNotification">
                             <Badge count={this.state.notification_count}>
                                 <i className="fa fa-bell font-20"></i>
                             </Badge>
                         </Link>
                     </div>
-                    <div className="navbar-item has-dropdown is-hoverable" style={{marginLeft: 20, marginRight: 30}}>
+                    <div className="navbar-item has-dropdown is-hoverable"
+                         style={{marginLeft: 20, marginRight: 30, display: 'inline-block'}}>
                         <a className="navbar-link  is-active">
                             <div>
-                                <img className="head_img" src="https://photo.laravelchen.cn/avataravatar.jpeg"/>
+                                <img className="head_img" src={Storage.LocalStorage().getItem("avatar")}/>
                             </div>
                         </a>
                         <div className="navbar-dropdown ">
-                            <a className="navbar-item" href="#">
-                                账户设置</a>
+                            <Link className="navbar-item" to="/profile">
+                                账户设置</Link>
                             <hr style={{margin: 5}}/>
                             <a onClick={this.logout.bind(this)} className="navbar-item " href="#">
                                 退出登录</a>
@@ -117,7 +119,7 @@ class NavBar extends Component {
                         <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                              alt="Bulma: a modern CSS framework based on Flexbox" width="32" height="28"/>
                         <img style={{paddingLeft: 20}}
-                             src="https://gw.alipayobjects.com/zos/rmsportal/DkKNubTaaVsKURhcVGkh.svg" width="115"
+                             src={title} width="115"
                              height="20" alt="Bulma"/>
                     </IndexLink>
                     <div className="navbar-burger burger" data-target="navMenuColorprimary-example">
@@ -129,11 +131,11 @@ class NavBar extends Component {
 
                 <div id="navMenuColorprimary-example" style={{paddingLeft: 50}} className="navbar-menu">
                     <div className="navbar-start">
-                        <IndexLink className="navbar-item" to="/"><i
-                            className="fa fa-wechat padding-right-5"></i>畅聊室</IndexLink>
+                        <a href="/" className="navbar-item"><i
+                            className="fa fa-wechat padding-right-5"></i>畅聊室</a>
                         <Link className="navbar-item" to="/friend"><i
                             className="fa fa-heart padding-right-5"></i>我的好友</Link>
-                        <Link className="navbar-item" to="/single"><i
+                        <Link className="navbar-item" to="/privateChat"><i
                             className="fa fa-comment padding-right-5"></i>私聊室</Link>
                     </div>
                     <div className="navbar-end">
